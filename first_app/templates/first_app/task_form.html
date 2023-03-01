@@ -1,0 +1,15 @@
+{% extends 'first_app/main.html' %} 
+
+
+{% block content %}
+
+<div class="header-bar"><a href="{{request.META.HTTP_REFERER}}" style="text-decoration: none;"><h3 style="margin-left: 40px;margin-top: 10px;font-weight: bold;margin-bottom: 30px;color: #fff;">&#8592 Go Back</h3></a></div>
+<form action=""  method="POST" style="text-align: center;">
+    {% csrf_token %}
+    {{form.as_p}}  <!--by default, the name of the modelform created by the createview is form therefore we just need to reference it directly in our template-->
+
+    <input class="button" type="submit" value="Submit">
+</form>
+
+
+{% endblock %}

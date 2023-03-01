@@ -1,0 +1,15 @@
+
+{% extends 'first_app/main.html' %} 
+
+
+{% block content %}
+<div class="header-bar"><a href="{{request.META.HTTP_REFERER}}" style="text-decoration: none;"><h3 style="margin-left: 40px;margin-top: 10px;font-weight: bold;margin-bottom: 30px;color: #fff;">&#8592 Go Back</h3></a></div>
+<div class="form-div">
+    <form action="" method="POST">
+        {% csrf_token %}
+        <p style="color:black; font-weight: bold;margin-left: 10px;">Are you sure you want to delete "<em>{{task}}</em>"</p>
+        <input class ="button" type="submit" value="Delete" style="margin-left: 60px;">
+    </form>
+    
+</div>
+{% endblock %}

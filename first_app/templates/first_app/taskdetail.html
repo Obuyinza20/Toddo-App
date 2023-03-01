@@ -1,0 +1,11 @@
+{% extends 'first_app/main.html' %} 
+
+
+{% block content %}
+
+<h1>Task: {{task}}</h1>
+<hr>
+<p>{{task.description}}</p>
+<small>Completed: {{task.complete}}</small>
+
+{% endblock %}

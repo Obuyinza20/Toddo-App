@@ -1,0 +1,70 @@
+{% extends 'first_app/main.html' %} 
+
+
+{% block content %}
+
+
+<div class="header-bar" >
+
+    <div>
+        <h3 style="color:rgb(8, 8, 8); font-weight: bold; margin-top: 50px;"> Hello {{request.user}}</h3>
+        <h3 style="margin:0">You have <i>{{count}}</i> incomplete task{{count|pluralize:"s"}}</h3>
+    </div>
+    {% if request.user.is_authenticated %}
+
+<a href="{% url 'logout' %}" style="text-decoration: none;"><h3 style="background:#b7b9b9;padding: 5px;border-radius: 30%;">Logout</h3></a>
+{% else %} 
+<a href="{% url 'login' %}" style="text-decoration: none;"><h3>Login</h3></a>
+{% endif %}
+
+</div>
+
+
+
+
+<div style="text-align: center;"><h1>YOUR SCHEDULE</h1>
+<h3><a href="{% url 'createtask' %}" id="add-link">&#43</a><a href="{% url 'createtask' %}" style="text-decoration: none;background:#EEA390;padding: 5px;border-radius: 30%">Add Task</a></h3>
+
+
+<hr>
+
+<form action="" method="get" >
+    <input type="text" name="search" value="{{search_input}}">
+    <input type="submit" name="" value="search" class="button">
+</form>
+<br>
+
+<div style="text-align: center;">
+
+<div class="task-items-wrapper">
+     {% for task in tasks %} 
+     <div class="task-wrapper" style="display: flex;align-items: center;justify-content: space-between; background-color: #fff;padding: 20px; border-top: 1px solid rgb(226, 226,226);"> 
+
+        {% if task.complete %} 
+
+        <div class="task-title" style="display:flex">
+            <div class="task-complete-icon" style="height: 20px; width: 20px; background-color: green; border-radius: 50%;"></div>
+            <s><a href="{% url 'updatetask' task.id %}" style="color:rgb(52, 4, 187);text-decoration: none; font-weight: bold;margin-left: 10px;">{{task}}</a> </s>
+             
+        </div>
+        <a class="delete-icon" href="{% url 'deletetask' task.id %}" style="text-decoration: none; color:rgb(94, 2, 2);font-weight: bold;">&#215</a>
+  
+        {% else %} 
+
+        <div class="task-title" style="display:flex;justify-content: space-between;align-items: center;">
+            <div class="task-incomplete-icon"  style="height: 20px; width: 20px; background-color: rgb(152, 153, 152); border-radius: 50%;"></div>
+           <a href="{% url 'updatetask' task.id %}" style="color:rgb(128, 23, 23);font-weight: bold;text-decoration: none;margin-left: 10px;">{{task}}</a>
+           
+             
+        </div>
+        <a class="delete-icon" href="{% url 'deletetask' task.id %}" style="text-decoration: none; color:rgb(94, 2, 2);font-weight: bold;">&#215</a>
+
+        {% endif %}
+
+     </div>
+     {% empty %} 
+     <h3>No tasks recorded yet</h3>
+    {% endfor %}
+
+
+{% endblock %}
